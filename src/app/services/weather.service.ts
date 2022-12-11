@@ -10,6 +10,12 @@ import { WeatherData } from '../models/weather.model';
 export class WeatherService {
   constructor(private http: HttpClient) {}
 
+  conversion(tempature: number): number {
+    const result = +(((tempature - 32) * 5) / 9).toFixed(1);
+
+    return result;
+  }
+
   getWeatherData(cityName: string): Observable<WeatherData> {
     return this.http.get<WeatherData>(
       `${enviroment.weatherApiBaseURL}${cityName}`,
